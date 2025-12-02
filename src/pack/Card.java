@@ -16,5 +16,22 @@ public class Card {
 	public String getRank() {
 		return rank;
 	}
-	public int getValue()
+	public int getValue() {
+		return value;
+	}
+	public void setSuit(String s) {
+		suit = s;
+	}
+	public void setRank(String r) {
+		rank = r;
+	}
+	public void setValue(int v) {
+		value = v;
+	}
+	public String toString() {
+		return rank + " of " + suit;
+	}
+
+
+	
 }
