@@ -9,6 +9,7 @@ public class Player {
 	public Player(String n) {
 		name = n;
 		score = 0;
+		hand = new ArrayList<Card>();
 	}
 	public void draw(Deck deck) {
 		hand.add(deck.drawCard());
@@ -32,7 +33,13 @@ public class Player {
 			return null;
 		}
 		Card h = hand.get(0);
-		hand.remove(0);
+		for (int i = 1; i < hand.size(); i++) {
+			Card c = hand.get(i);
+			if (c.getValue() > h.getValue()) {
+				h = c;
+			}
+		}
+		hand.remove(h);
 		return h;
 	}
 }

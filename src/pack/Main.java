@@ -7,16 +7,40 @@ public class Main {
 	public static void main(String[] args) {
 		Player one = new Player("Alice");
 		Player two = new Player("Bob");
-		int[] nums = {1,2,3,4,5,6,7,8,9,10,11,12,13};
-		String[] type = {"Clovers", "Spades", "Diamonds", "Hearts"};
-		ArrayList<String> types = new ArrayList<String>();
-		for (int i = 0; i < nums.length; i++) {
-			for (int j = 0; j < type.length; j++) {
-				types.add(nums[i], type[j]);
+		Deck d = new Deck();
+        d.shuffle();
+		one.drawStartingHand(d);
+		two.drawStartingHand(d);
+		
+		for (int i = 1; i < 6; i++) {
+			System.out.println("Round " + i);
+			Card uno = one.playCard();
+			Card dos = two.playCard();
+			System.out.println(one.getName() + " plays " + uno + ", " + two.getName() + " plays " + dos);
+			if (uno.getValue() > dos.getValue()) {
+				one.addPoint();
+				System.out.println(one.getName() + " wins the round!\n");
+			}
+			else if (uno.getValue() < dos.getValue()) {
+				two.addPoint();
+				System.out.println(two.getName() + " wins the round!\n");
+			}
+			else {
+				System.out.println("It's a tie!\n");
 			}
 		}
-		Deck d = new Deck(types);
-		Deck.drawStartingHand(d);
+		
+		System.out.println("\nFinal Score:\n" + one.getName() + ": " + one.getScore() + "\n" + two.getName() + ": " + two.getScore());
+		
+		if (one.getScore() > two.getScore()) {
+			System.out.println(one.getName() + " is the winner! Congratulations!");
+		}
+		else if (one.getScore() < two.getScore()) {
+			System.out.println(two.getName() + " is the winner! Congratulations!");
+		}
+		else {
+			System.out.println("The game is a tie! Nice try though y'all.");
+		}
 	}
 
 }
